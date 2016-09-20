@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loading JSON from file with BULMA and JQUERY</title>
+    <script src="./jquery.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
+</head>
+
+<body>
+    <div class="container is fluid">
+        <h1 class="title is-1">Test Website</h1>
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img class="bigpic" src="./content/person2.png" alt="">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-32x32">
+                                    <img class="smallpic" src="./content/person2.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-5">Defult Info</p>
+                                <p class="subtitle is-6">@DefaultInfo</p>
+                            </div>
+                        </div>
+                        <div class="content 1">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a href="#">@bulmaio</a>.
+                            <a href="#">#css</a> <a href="#">#responsive</a>
+                            <br>
+                            <small>11:09 PM - 19 Sep 2016</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is half">
+                <h1 class="subtitle">This is a proof of concept, in which I'm testing several things about 2 frameworks especifically: JQUERY and BULMA testing asyncronous calls to a JSON file from the host</h1>
+                <h1 class="subtitle">Among other things tested are:</h1>
+                <ul>
+                    <li>-   Calling the JSON File</li>
+                    <li>-   Progress Bar</li>
+                    <li>-   Checking Compatibility between frameworks</li>
+                    <li>-   Changing Images according to selection</li>
+                    <li>-   Date Manipulation/Concat</li>
+                </ul>
+                <progress style="display: none;" class="progress" value="0" max="100">0%</progress>
+            </div>
+        </div>
+        <div class="columns">
+            <br>
+            <a class="find1">LOAD RolandoED</a>
+        </div>
+        <div class="columns">
+            <a class="find2">LOAD MR random</a>
+            <br>
+        </div>
+        <div class="columns">
+            <article class="message">
+                <div class="message-header">
+                    Hi!
+                </div>
+                <div class="message-body">
+                    Select one of these 2 links.
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Bulma with Jquery</strong> by <a href="http://github.com/rolandoED">ROLANDOED</a>.
+            </p>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">
+var currsel;
+var jsontest;
+//<![CDATA[
+$(window).load(function() {
+    //$(".result").css("color", "red");
+    $(".result").css("background-color", "lightgray");
+
+}); //]]>
+
+$("a").click(function() {
+    $("." + "progress").show();
+    var x = document.getElementsByClassName("progress");
+    x[0].value = 25;
+
+    $.getJSON("./jsondata.json", function(json) {
+        $('p.title.is-5').html(json[currsel].name);
+        $('p.subtitle.is-6').html('@' + json[currsel].twithandle);
+        var dat = new Date();
+        var mm = dat.getMonth() + 1;
+        var year = dat.getFullYear();
+        var day = dat.getDay() + 1;
+        x[0].value = 50;
+        $('div.content.1').html(json[currsel].message + ' <a href="#">@' + json[currsel].twithandle +
+            '</a>' + '  <small>' + day + '/' + mm + '/' + year + '/' + '</small>');
+        x[0].value = 75;
+        $('img.bigpic').attr('src', './content/' + json[currsel].photo);
+        $('img.smallpic').attr('src', './content/' + json[currsel].photo);
+        x[0].value = 100;
+        x[0].value = 0;
+        $("." + "progress").hide();
+    });
+});
+
+
+$(".find1").click(function() {
+    currsel = 0;
+    console.log('Persona1' + 1);
+});
+$(".find2").click(function() {
+    currsel = 1;
+    console.log('Persona2' + 2);
+});
+</script>
+
+</html>

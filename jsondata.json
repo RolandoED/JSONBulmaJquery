@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Rolando",
+    "twithandle": "dRolandoED",
+    "message": "This is my original message. Check it out im loading from a JSON !! ",
+    "photo": "person1.png",
+    "value": 3500
+  },
+  {
+    "name": "Mr Random",
+    "twithandle": "RandomPer",
+    "message": "This is a random message from Mr Random, If you Read JSON was properly loaded",
+    "photo": "person2.png",
+    "value": 4456,
+    "campo": 323
+  }
+]
